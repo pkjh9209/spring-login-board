@@ -16,7 +16,17 @@ public class MemberController {
 	@RequestMapping(value = "/index.do")
 	public String index(Model model) {
 		
-
+		return "member/index";
+	}
+	//로그인 화면
+	@RequestMapping(value = "/login.do")
+	public String login(Model model) {
+		return "member/login";
+	}
+	//로그인데이터
+	@RequestMapping(value = "/loginProc.do")
+	public String loginProc(Model model) {
+		
 		return "member/index";
 	}
 	//회원가입 화면

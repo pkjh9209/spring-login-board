@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
 	<meta charset="utf-8">
 	<%@include file ="../head.jsp" %>
+	<spring:url value="/resources/js/memberInsert.js" var="memberInsertJs"></spring:url>
 </head>
 <body>
 	<div class="container">
@@ -33,16 +33,32 @@
 		</div>
 <!-- body  -->
 		<div class="row">
-			<form action="${path}/member/insertProc.do">
-				아이디
-				<input class="form-control" type="text" name="userId"/>
-				비밀번호
-				<input class="form-control" type="password" name="userPw"/>
-				이름
-				<input class="form-control" type="text" name="userName"/>
-				전화번호
-				<input class="form-control" type="text" name="userTel"/>
-				<input class="btn btn-primary mt-5" type="submit" value="회원추가"/>
+			<form action="${path}/member/insertProc.do" onsubmit="return numAdd()">
+				<input type="hidden" id="userTel01" name="userTel"/>
+				<p>아이디</p>
+				<div class="col-lg-12">
+					<input class="form-control" type="text" name="userId"/>
+				</div>
+				<p>비밀번호</p>
+				<div class="col-lg-12">
+					<input class="form-control" type="password" name="userPw"/>
+				</div>
+				<p>이름</p>
+				<div class="col-lg-12">
+					<input class="form-control" type="text" name="userName"/>
+				</div>
+				<p>전화번호</p>
+				<div class="col-lg-4">
+					<input class="form-control" id="userTel02" type="text" name="userTel02"/>
+				</div>
+				<div class="col-lg-4">
+					<input class="form-control" id="userTel03" type="text" name="userTel03"/>
+				</div>
+				<div class="col-lg-4">
+					<input class="form-control" id="userTel04" type="text" name="userTel04"/>
+				</div>
+				<input class="btn btn-primary mt-5 row" type="submit" value="회원추가"/>
+			<script type="text/javascript" src="${memberInsertJs}"></script>	
 			</form>
 		</div>
 	</div>

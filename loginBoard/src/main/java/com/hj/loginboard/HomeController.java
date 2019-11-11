@@ -17,7 +17,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		model.addAttribute("myobj","∞¥√º¿‘¥œ¥Ÿ");
 		return "main";
 	}
 	

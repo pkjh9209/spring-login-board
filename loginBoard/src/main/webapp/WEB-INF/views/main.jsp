@@ -36,7 +36,9 @@
 
 <!-- body  -->
 	<div class="row"></div>
-		<a class="btn btn-primary" href="${path}/member/insert.do">회원추가</a>
+		<a class="btn btn-primary" href="${path}/member/insert.do">회원가입</a>
+		
+		<a class="btn btn-primary" href="${path}/member/login.do">로그인</a>
 	</div>
 </body>
 </html>
