@@ -1,4 +1,4 @@
-package com.hj.loginboard.member;
+package com.hj.loginboard.freeboard;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class MemberDTO {
+public class FreeboardDTO {
 
-	private int userIdx;
-	private String userId;
-	private String userPw;
-	private String userName;
-	private String userTel;
-	private String rgdate;
+	private int boardIdx;
+	private String boardTitle;
+	private String boardContent;
+	private String writer;
+	private String rgDate;
+	private String hitView;
 }

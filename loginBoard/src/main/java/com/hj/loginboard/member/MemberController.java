@@ -1,10 +1,13 @@
 package com.hj.loginboard.member;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hj.loginboard.member.MemberDTO;
 
 @Controller
 @RequestMapping(value="/member")
@@ -24,11 +27,7 @@ public class MemberController {
 		return "member/login";
 	}
 	//로그인데이터
-	@RequestMapping(value = "/loginProc.do")
-	public String loginProc(Model model) {
-		
-		return "member/index";
-	}
+
 	//회원가입 화면
 	@RequestMapping(value = "/insert.do")
 	public String insert(Model model) {

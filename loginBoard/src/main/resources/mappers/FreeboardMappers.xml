@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+	 <mapper namespace="freeboard">
+	 
+	 	<!-- 글작성 -->
+		<insert id="boardWrite" parameterType="com.hj.loginboard.freeboard.FreeboardDTO">
+			INSERT INTO freeboard
+			(boardTitle,boardContent,writer,rgDate)
+			VALUES
+			(#{boardTitle},#{boardContent},#{writer},now());
+		</insert>
+		
+		<!-- 글조회 -->
+		<select id="boardSelect" resultType="com.hj.loginboard.freeboard.FreeboardDTO"
+								 parameterType="com.hj.loginboard.freeboard.FreeboardDTO">
+			SELECT
+				boardIdx,boardTitle,boardContent,writer,rgDate,hitView
+			FROM freeboard
+			WHERE boardIdx = #{boardIdx};
+		</select>
+		
+		<!-- 글수정 -->
+		<update id="boardUpdate">
+			UPDATE freeboard
+			SET boardTitle = #{boardTitle},
+				boardContent = #{boardContent}
+			WHERE boardIdx = #{boardIdx};
+		</update>
+		
+		<!-- 글삭제 -->
+		<delete id="boardDelete">
+			DELETE FROM freeboard
+			WHERE boardIdx = #{boardIdx};
+		</delete>
+		
+		<!-- 글목록 -->
+		<select id="boardList" resultType="com.hj.loginboard.freeboard.FreeboardDTO">
+			SELECT 
+				boardIdx,boardTitle,writer,rgDate,hitView
+			FROM freeboard
+			ORDER BY boardIdx DESC
+		</select>
+	 </mapper>
