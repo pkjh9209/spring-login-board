@@ -33,20 +33,11 @@ public class FreeboardDAO {
 	}
 	
 	//글 목록
-	public List<FreeboardDTO> list(String number) throws Exception{
-		int num = number==null? 1: Integer.parseInt(number);
+	public List<FreeboardDTO> list(String pageNum) throws Exception{
+		System.out.println("pageNum = " + pageNum);
+		int num = pageNum==null? 1: Integer.parseInt(pageNum);
 		num = 10*(num-1);
-		
-		return ss.selectList("freeboard.pageList",num);
+		return ss.selectList("freeboard.pageList");
 	}
-	//전체 글 카운트
-	public void boardCount(int cnt) throws Exception{
-		
-		if( cnt%10 > 0 ) {
-			cnt = cnt / 10+1;
-		}else {
-			cnt = cnt / 10;
-		}
-		ss.count("freeboard");
-	}
+	
 }

@@ -21,9 +21,8 @@ public class FreeboardController {
 	
 	//자유게시판페이지
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(@RequestParam("pageNum")FreeboardDTO fd,String pageNum,Model model) throws Exception {
+	public String index(@RequestParam("pageNum")String pageNum,Model model) throws Exception {
 		
-		cntBoard = service.boardCount();
 		List<FreeboardDTO> list = service.list(pageNum);
 		model.addAttribute("list",list);
 		return "/freeboard/index";
