@@ -47,6 +47,6 @@ public class FreeboardDAO {
 		}else {
 			cnt = cnt / 10;
 		}
-		ss.boardCount("freeboard.boardCount",cnt);
+		ss.count("freeboard");
 	}
 }
