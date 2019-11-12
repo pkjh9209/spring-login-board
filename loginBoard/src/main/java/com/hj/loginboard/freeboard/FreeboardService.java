@@ -29,7 +29,13 @@ public class FreeboardService {
 		dao.boardDelete(idx);
 	}
 	//글목록
-	public List<FreeboardDTO> list() throws Exception{
-		return dao.list();
+	public List<FreeboardDTO> list(String pageNum) throws Exception{
+		return dao.list(pageNum);
 	}
+	//글 전체 카운트
+	public void boardCount() throws Exception{
+		
+		return dao.boardCount();
+	}
+	
 }

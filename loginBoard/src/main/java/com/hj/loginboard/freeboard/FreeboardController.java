@@ -21,8 +21,10 @@ public class FreeboardController {
 	
 	//자유게시판페이지
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(Model model) throws Exception {
-		List<FreeboardDTO> list = service.list();
+	public String index(@RequestParam("pageNum")FreeboardDTO fd,String pageNum,Model model) throws Exception {
+		
+		cntBoard = service.boardCount();
+		List<FreeboardDTO> list = service.list(pageNum);
 		model.addAttribute("list",list);
 		return "/freeboard/index";
 		
@@ -43,7 +45,7 @@ public class FreeboardController {
 	}
 	
 	//글내용	
-	@RequestMapping(value = "/boardView.do")
+	@RequestMapping(value = "/boardView.do", method = RequestMethod.GET)
 	public String boardView(@RequestParam("idx") int idx, Model model) throws Exception{
 		
 		FreeboardDTO fd = service.select(idx);

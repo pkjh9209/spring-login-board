@@ -28,12 +28,25 @@ public class FreeboardDAO {
 	
 	//글삭제
 	public void boardDelete(int idx) throws Exception{
+		
 		ss.delete("freeboard.boardDelete",idx);
 	}
 	
 	//글 목록
-	public List<FreeboardDTO> list() throws Exception{
+	public List<FreeboardDTO> list(String number) throws Exception{
+		int num = number==null? 1: Integer.parseInt(number);
+		num = 10*(num-1);
 		
-		return ss.selectList("freeboard.boardList");
+		return ss.selectList("freeboard.pageList",num);
+	}
+	//전체 글 카운트
+	public void boardCount(int cnt) throws Exception{
+		
+		if( cnt%10 > 0 ) {
+			cnt = cnt / 10+1;
+		}else {
+			cnt = cnt / 10;
+		}
+		ss.boardCount("freeboard.boardCount",cnt);
 	}
 }
