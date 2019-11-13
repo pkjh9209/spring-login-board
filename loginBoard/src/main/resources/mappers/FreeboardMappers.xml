@@ -46,15 +46,10 @@
 		
 		<!-- 글페이지 -->
 		<select id="listPage" resultType="com.hj.loginboard.freeboard.FreeboardDTO"
-				parameterType="com.hj.loginboard.freeboard.BoaderCnt">
-			SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
-			FROM(
-				SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
-				FROM freeboard
-				ORDER BY boardIdx DESC
-			)c
-			where boardIdx between #{rowStart} and #{rowEnd}
-			ORDER BY boardIdx DESC;
+				parameterType="com.hj.loginboard.freeboard.BoardCnt">
+				SELECT * FROM freeboard 
+				ORDER BY boardIdx DESC 
+				LIMIT #{rowStart},10;
 		</select>
 		
 		<!-- 전체글 카운트 -->
@@ -62,20 +57,6 @@
 			SELECT count(boardIdx)
 			FROM freeboard
 			WHERE boardIdx;
-		</select>
-		<!-- 게시글 검색 -->
-		<select id="listSearch"
-				resultType="com.hj.loginboard.freeboard.FreeboardDTO">
-			SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
-			FROM(
-				SELECT
-					boardIdx,boardTitle,boardContent,writer,rgDate,hitView
-				FROM freeboard
-				WHERE boardIdx like '%' || '제목' || '%'
-			    ORDER BY boardIdx DESC
-			)t
-			WHERE boardIdx between 1 and 10
-			ORDER BY boardIdx DESC;
 		</select>
 		
 		<!-- 댓글 조회 -->
@@ -85,6 +66,7 @@
 			FROM boardReply
 			WHERE boardIdx = #{boardIdx};
 		</select>
+		
 		<!-- 댓글 쓰기 -->
 		<insert id="writeComment">
 			INSERT INTO boardReply
