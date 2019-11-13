@@ -16,8 +16,7 @@
 		<!-- 글조회 -->
 		<select id="boardSelect" resultType="com.hj.loginboard.freeboard.FreeboardDTO"
 								 parameterType="com.hj.loginboard.freeboard.FreeboardDTO">
-			SELECT
-				boardIdx,boardTitle,boardContent,writer,rgDate,hitView
+			SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
 			FROM freeboard
 			WHERE boardIdx = #{boardIdx};
 		</select>
@@ -36,6 +35,7 @@
 			WHERE boardIdx = #{boardIdx};
 		</delete>
 		
+		
 		<!-- 글목록 -->
 		<select id="boardList" resultType="com.hj.loginboard.freeboard.FreeboardDTO">
 			SELECT 
@@ -46,10 +46,15 @@
 		
 		<!-- 글페이지 -->
 		<select id="listPage" resultType="com.hj.loginboard.freeboard.FreeboardDTO"
-							  parameterType="com.hj.loginboard.freeboard.BoaderCnt">
-			SELECT * FROM freeboard 
-			ORDER BY boardIdx DESC 
-			LIMIT #{rowStart},#{rowEnd};
+				parameterType="com.hj.loginboard.freeboard.BoaderCnt">
+			SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
+			FROM(
+				SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
+				FROM freeboard
+				ORDER BY boardIdx DESC
+			)c
+			where boardIdx between #{rowStart} and #{rowEnd}
+			ORDER BY boardIdx DESC;
 		</select>
 		
 		<!-- 전체글 카운트 -->
@@ -58,5 +63,34 @@
 			FROM freeboard
 			WHERE boardIdx;
 		</select>
+		<!-- 게시글 검색 -->
+		<select id="listSearch"
+				resultType="com.hj.loginboard.freeboard.FreeboardDTO">
+			SELECT boardIdx,boardTitle,boardContent,writer,rgDate,hitView
+			FROM(
+				SELECT
+					boardIdx,boardTitle,boardContent,writer,rgDate,hitView
+				FROM freeboard
+				WHERE boardIdx like '%' || '제목' || '%'
+			    ORDER BY boardIdx DESC
+			)t
+			WHERE boardIdx between 1 and 10
+			ORDER BY boardIdx DESC;
+		</select>
+		
+		<!-- 댓글 조회 -->
+		<select id="viewComment" resultType="com.hj.loginboard.comment.CommentDTO">
+			SELECT
+			cmtIdx,cmtContent,writer,rgDate
+			FROM boardReply
+			WHERE boardIdx = #{boardIdx};
+		</select>
+		<!-- 댓글 쓰기 -->
+		<insert id="writeComment">
+			INSERT INTO boardReply
+			(boardIdx,cmtContent,writer,rgDate)
+			VALUES
+			(#{boardIdx},'#{cmtContent}','#{writer}',now());
+		</insert>
 		
 	 </mapper>

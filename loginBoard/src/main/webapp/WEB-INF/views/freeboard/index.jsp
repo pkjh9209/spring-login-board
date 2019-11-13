@@ -42,7 +42,7 @@
 	 			<c:forEach items="${list}" var="fb">
 					<tr>
 						<td>${fb.boardIdx}</td>
-						<td><a href="${path}/freeboard/boardView.do?idx=${fb.boardIdx}">${fb.boardTitle}</a></td>
+						<td><a href="${path}/freeboard/boardView.do?boardIdx=${fb.boardIdx}">${fb.boardTitle}</a></td>
 						<td>${fb.writer}</td>
 						<td>${fb.rgDate}</td>
 						<td>${fb.hitView}</td>
@@ -51,10 +51,19 @@
 			</table>
 			<div class="row">
 				<div class="col-xs-12">
+<script type="text/javascript">
+	
+</script>
 					<ul class="pagination">
+						<c:if test="${pn.prev}">
+							<li class="page-item"><a class="page-link" href="${path}/freeboard/index.do${pn.makeQuery(pn.startPage - 1)}">prev</a></li>
+						</c:if>
 						<c:forEach begin="${pn.startPage}" end="${pn.endPage}" var="i">
-							<li class="page-item"><a class="page-link" href="${path}/freeboard/index.do?pageNum=${i}">${i}</a></li>
+							<li class="page-item active${pn.makeQuery(i)}"><a class="page-link" href="${path}/freeboard/index.do${pn.makeQuery(i)}">${i}</a></li>
 						</c:forEach>
+						<c:if test="${pn.next && pn.endPage > 0}">
+							<li class="page-item"><a class="page-link" href="${path}/freeboard/index.do${pn.makeQuery(pn.endPage + 1)}">Next</a></li>
+						</c:if>
 					</ul>
 				</div>			
 				<div class="col-sm-1">

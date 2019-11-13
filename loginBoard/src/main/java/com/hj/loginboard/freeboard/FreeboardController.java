@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.hj.loginboard.comment.CommentDTO;
+import com.hj.loginboard.comment.CommentService;
 import com.hj.loginboard.freeboard.FreeboardDTO;
 
 @Controller
@@ -20,9 +23,12 @@ public class FreeboardController {
 	@Autowired
 	FreeboardService service;
 	
+	@Autowired
+	CommentService cmtService;
+	
 	//자유게시판페이지
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(@ModelAttribute("cnt") BoaderCnt cnt, Model model) throws Exception {
+	public String index(@ModelAttribute("cnt") BoardCnt cnt, Model model) throws Exception {
 		//List<FreeboardDTO> list = service.list();
 		List<FreeboardDTO> list = service.listPage(cnt);
 		model.addAttribute("list",list);
@@ -42,7 +48,7 @@ public class FreeboardController {
 		return "/freeboard/boardWrite";
 	}
 	
-	//글작성	
+	//글작성
 	@RequestMapping(value = "/boardWriteProc.do", method = RequestMethod.POST)
 	public String boardWriteProc(FreeboardDTO fd) throws Exception {
 		
@@ -50,13 +56,23 @@ public class FreeboardController {
 		return "redirect:/freeboard/index.do";
 	}
 	
-	//글내용	
+	//글내용조회
 	@RequestMapping(value = "/boardView.do", method = RequestMethod.GET)
-	public String boardView(@RequestParam("idx") int idx, Model model) throws Exception{
+	public String boardView(@RequestParam("boardIdx") int boardIdx, Model model) throws Exception{
 		
-		FreeboardDTO fd = service.select(idx);
+		FreeboardDTO fd = service.select(boardIdx);
+		//cmtService.writeComment(cd);
 		model.addAttribute("bdView",fd);
+		
+		List<CommentDTO> cmtList = cmtService.viewComment(boardIdx);
+		model.addAttribute("cmtList", cmtList);
 		return "/freeboard/boardView";
+	}
+	//댓글작성
+	@RequestMapping(value = "/cmtWriteProc.do", method = RequestMethod.POST)
+	public String cmtWriteProc(CommentDTO cd) throws Exception{
+		
+		return null;
 	}
 	
 	//수정 페이지 

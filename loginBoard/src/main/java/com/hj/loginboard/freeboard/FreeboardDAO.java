@@ -37,7 +37,7 @@ public class FreeboardDAO {
 		return ss.selectList("freeboard.boardList");
 	}
 	//臂 格废(其捞隆贸府)
-	public List<FreeboardDTO> listPage(BoaderCnt cnt) throws Exception{
+	public List<FreeboardDTO> listPage(BoardCnt cnt) throws Exception{
 
 		return ss.selectList("freeboard.listPage",cnt);
 	}

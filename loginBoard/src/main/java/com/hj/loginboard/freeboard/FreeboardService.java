@@ -33,7 +33,7 @@ public class FreeboardService {
 		return dao.list();
 	}
 	//臂格废(其捞隆贸府)
-	public List<FreeboardDTO> listPage(BoaderCnt cnt) throws Exception{
+	public List<FreeboardDTO> listPage(BoardCnt cnt) throws Exception{
 		return dao.listPage(cnt);
 	}
 	public int listCount() throws Exception{

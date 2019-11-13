@@ -74,6 +74,19 @@
 				</div>
 			</form>
 		</div>
+		<div class="row">
+		<h1>덧글</h1>
+			<ul>
+				<c:forEach items="${cmtList}" var="cmtList">
+					<li>
+						<p>작성자 : ${cmtList.writer}</p>
+						<p>작성 날짜 : ${cmtList.rgDate}</p>
+						<p>내용</p>
+						<p>${cmtList.cmtContent}</p>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
