@@ -28,9 +28,16 @@ public class FreeboardService {
 	public void delete(int idx) throws Exception{
 		dao.boardDelete(idx);
 	}
-	//글목록
-	public List<FreeboardDTO> list(String pageNum) throws Exception{
-		return dao.list(pageNum);
+	//글 목록
+	public List<FreeboardDTO> list() throws Exception{
+		return dao.list();
+	}
+	//글목록(페이징처리)
+	public List<FreeboardDTO> listPage(BoaderCnt cnt) throws Exception{
+		return dao.listPage(cnt);
+	}
+	public int listCount() throws Exception{
+		return dao.listCount();
 	}
 	
 }

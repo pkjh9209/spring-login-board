@@ -31,13 +31,19 @@ public class FreeboardDAO {
 		
 		ss.delete("freeboard.boardDelete",idx);
 	}
-	
-	//글 목록
-	public List<FreeboardDTO> list(String pageNum) throws Exception{
-		System.out.println("pageNum = " + pageNum);
-		int num = pageNum==null? 1: Integer.parseInt(pageNum);
-		num = 10*(num-1);
-		return ss.selectList("freeboard.pageList");
+	//글목록
+	public List<FreeboardDTO> list() throws Exception{
+
+		return ss.selectList("freeboard.boardList");
+	}
+	//글 목록(페이징처리)
+	public List<FreeboardDTO> listPage(BoaderCnt cnt) throws Exception{
+
+		return ss.selectList("freeboard.listPage",cnt);
+	}
+	//전체글 리스트
+	public int listCount() throws Exception{
+		return ss.selectOne("freeboard.listCount");
 	}
 	
 }

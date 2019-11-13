@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,10 +22,16 @@ public class FreeboardController {
 	
 	//자유게시판페이지
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(@RequestParam("pageNum")String pageNum,Model model) throws Exception {
-		
-		List<FreeboardDTO> list = service.list(pageNum);
+	public String index(@ModelAttribute("cnt") BoaderCnt cnt, Model model) throws Exception {
+		//List<FreeboardDTO> list = service.list();
+		List<FreeboardDTO> list = service.listPage(cnt);
 		model.addAttribute("list",list);
+		
+		PageNation pn = new PageNation();
+		pn.setCnt(cnt);
+		pn.setTotalCount(service.listCount());
+		model.addAttribute("pn", pn);
+		
 		return "/freeboard/index";
 		
 	}

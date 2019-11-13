@@ -36,13 +36,27 @@
 			WHERE boardIdx = #{boardIdx};
 		</delete>
 		
+		<!-- 글목록 -->
+		<select id="boardList" resultType="com.hj.loginboard.freeboard.FreeboardDTO">
+			SELECT 
+				boardIdx,boardTitle,writer,rgDate,hitView
+			FROM freeboard
+			ORDER BY boardIdx DESC
+		</select>
+		
 		<!-- 글페이지 -->
-		<select id="pageList" resultType="com.hj.loginboard.freeboard.FreeboardDTO"
-							  parameterType="com.hj.loginboard.freeboard.FreeboardDAO">
+		<select id="listPage" resultType="com.hj.loginboard.freeboard.FreeboardDTO"
+							  parameterType="com.hj.loginboard.freeboard.BoaderCnt">
 			SELECT * FROM freeboard 
 			ORDER BY boardIdx DESC 
-			LIMIT 1,10;
+			LIMIT #{rowStart},#{rowEnd};
 		</select>
-	
+		
+		<!-- 전체글 카운트 -->
+		<select id="listCount" resultType="int">
+			SELECT count(boardIdx)
+			FROM freeboard
+			WHERE boardIdx;
+		</select>
 		
 	 </mapper>

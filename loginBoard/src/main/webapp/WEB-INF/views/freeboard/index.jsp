@@ -52,11 +52,9 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-						<c:forEach begin="1" end="${membercnt}" var="i">
-						<li class="page-item"><a class="page-link" href="${path}/freeboard/index.do?pageNum=${i}">${i}</a></li>
+						<c:forEach begin="${pn.startPage}" end="${pn.endPage}" var="i">
+							<li class="page-item"><a class="page-link" href="${path}/freeboard/index.do?pageNum=${i}">${i}</a></li>
 						</c:forEach>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
 					</ul>
 				</div>			
 				<div class="col-sm-1">

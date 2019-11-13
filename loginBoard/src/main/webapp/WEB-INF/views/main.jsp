@@ -18,7 +18,7 @@
 					</div>
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="${path}">Home</a></li>
-						<li><a href="${path}/freeboard/index.do?pageNum=1">Freeboard</a></li>
+						<li><a href="${path}/freeboard/index.do?page=1&pageNum=10">Freeboard</a></li>
 						<li><a href="${path}/member/index.do">Member</a></li>
 					</ul>
 				</div>
