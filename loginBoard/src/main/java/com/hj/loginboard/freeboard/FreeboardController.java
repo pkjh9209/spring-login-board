@@ -1,6 +1,9 @@
 package com.hj.loginboard.freeboard;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ public class FreeboardController {
 
 	@Autowired
 	SqlSession ss;
+	
 	@Autowired
 	FreeboardService service;
 	
@@ -29,7 +33,6 @@ public class FreeboardController {
 	//자유게시판페이지
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String index(@ModelAttribute("cnt") BoardCnt cnt, Model model) throws Exception {
-		//List<FreeboardDTO> list = service.list();
 		List<FreeboardDTO> list = service.listPage(cnt);
 		model.addAttribute("list",list);
 		
@@ -43,15 +46,19 @@ public class FreeboardController {
 	}
 	
 	//글작성페이지
-	@RequestMapping(value = "/boardWrite.do")
-	public String boardWrite(Model model) throws Exception{
+	@RequestMapping(value = "/boardWrite.do", method = RequestMethod.GET )
+	public String boardWrite(HttpSession session, Model model) throws Exception{
+		Object loginSs = session.getAttribute("user");
+		if(loginSs == null) {
+			model.addAttribute("msg",false);
+		}
+		
 		return "/freeboard/boardWrite";
 	}
 	
 	//글작성
 	@RequestMapping(value = "/boardWriteProc.do", method = RequestMethod.POST)
 	public String boardWriteProc(FreeboardDTO fd) throws Exception {
-		
 		service.write(fd);
 		return "redirect:/freeboard/index.do";
 	}
@@ -61,9 +68,7 @@ public class FreeboardController {
 	public String boardView(@RequestParam("boardIdx") int boardIdx, Model model) throws Exception{
 		
 		FreeboardDTO fd = service.select(boardIdx);
-		//cmtService.writeComment(cd);
 		model.addAttribute("bdView",fd);
-		
 		List<CommentDTO> cmtList = cmtService.viewComment(boardIdx);
 		model.addAttribute("cmtList", cmtList);
 		return "/freeboard/boardView";
@@ -72,7 +77,6 @@ public class FreeboardController {
 	//수정 페이지 
 	@RequestMapping(value = "/boardUpdate.do", method = RequestMethod.GET)
 	public String boardUpdate(@RequestParam("boardIdx") int idx, Model model) throws Exception{
-		
 		FreeboardDTO fd = service.select(idx);
 		model.addAttribute("upView",fd);
 		return "/freeboard/boardUpdate";
@@ -88,8 +92,6 @@ public class FreeboardController {
 	//글수정
 	@RequestMapping(value = "/boardUpdateProc.do",method = RequestMethod.POST)
 	public String boardUpdateProc(FreeboardDTO fd) throws Exception{
-		
-		System.out.println("수정완료");
 		service.update(fd);
 		return "redirect:/freeboard/index.do";
 	}
@@ -97,8 +99,6 @@ public class FreeboardController {
 	//글삭제
 	@RequestMapping(value = "/boardDeleteProc.do", method = RequestMethod.POST)
 	public String boardDeleteProc(@RequestParam("boardIdx") int idx) throws Exception{
-		
-		System.out.println("삭제완료");
 		service.delete(idx);
 		return "redirect:/freeboard/index.do";
 	}

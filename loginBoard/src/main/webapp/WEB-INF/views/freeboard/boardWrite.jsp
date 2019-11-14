@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -14,7 +13,7 @@
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#">신입개발자</a>
+						<a class="navbar-brand" href="${path}">신입개발자</a>
 					</div>
 					<ul class="nav navbar-nav">
 						<li><a href="${path}">Home</a></li>
@@ -46,7 +45,7 @@
 					</div>
 					<div class="col-sm-12">
 						<p>작성자</p>
-						<input class="form-control" type="text" name="writer">
+						<input class="form-control" type="text" name="writer" value="${user.userId}" readonly="readonly">
 					</div>
 				</div>
 				<div class="col-sm-1">

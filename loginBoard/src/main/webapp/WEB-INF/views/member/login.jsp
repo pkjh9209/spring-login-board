@@ -1,15 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<title>Home</title>
-	<meta charset="utf-8">
-	<%@include file ="../head.jsp" %>
+<title>Home</title>
+<meta charset="utf-8">
+<%@include file="../head.jsp"%>
 </head>
 <body>
-		<div class="container">
-<!--  menu -->
+	<div class="container">
+		<!--  menu -->
 		<div class="row">
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -23,8 +22,8 @@
 					</ul>
 				</div>
 			</nav>
-		</div>	
-<!--  광고 -->
+		</div>
+		<!--  광고 -->
 		<div class="row">
 			<div class="jumbotron">
 				<h1>로그인페이지</h1>
@@ -32,13 +31,16 @@
 			</div>
 		</div>
 
-<!-- body  -->
-	<div class="row">
-		<form action="">
-			<input type="text" name="userId">
-			<input type="password" name="userPw">
-		</form>
-	</div>
+		<!-- body  -->
+		<div class="row">
+			<form action="${path}/member/loginProc.do" method="post">
+				<p>아이디</p>
+				<input type="text" name="userId">
+				<p>비밀번호</p>
+				<input type="password" name="userPw">
+				<input type="submit" value="로그인하기">
+			</form>
+		</div>
 	</div>
 </body>
 </html>

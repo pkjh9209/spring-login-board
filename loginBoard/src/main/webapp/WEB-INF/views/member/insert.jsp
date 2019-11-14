@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -14,7 +13,7 @@
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#">신입개발자</a>
+						<a class="navbar-brand" href="${path}">신입개발자</a>
 					</div>
 					<ul class="nav navbar-nav">
 						<li><a href="${path}">Home</a></li>
@@ -38,7 +37,11 @@
 				<p>아이디</p>
 				<div class="col-lg-12">
 					<input class="form-control" type="text" name="userId"/>
+					<script type="text/javascript" src="${idCheckAjax}"></script>
+					<button type="button" onclick="idCheck();" class="idCheck">아이디중복확인</button>
 				</div>
+				<div class="result"><span class="msg">이미 아이디가 존재합니다.</span></div>
+				
 				<p>비밀번호</p>
 				<div class="col-lg-12">
 					<input class="form-control" type="password" name="userPw"/>
@@ -49,13 +52,13 @@
 				</div>
 				<p>전화번호</p>
 				<div class="col-lg-4">
-					<input class="form-control" id="userTel02" type="text" name="userTel02"/>
+					<input class="form-control" id="userTel02" type="text" name="userTel02" maxlength="3"/>
 				</div>
 				<div class="col-lg-4">
-					<input class="form-control" id="userTel03" type="text" name="userTel03"/>
+					<input class="form-control" id="userTel03" type="text" name="userTel03" maxlength="4"/>
 				</div>
 				<div class="col-lg-4">
-					<input class="form-control" id="userTel04" type="text" name="userTel04"/>
+					<input class="form-control" id="userTel04" type="text" name="userTel04" maxlength="4"/>
 				</div>
 				<input class="btn btn-primary mt-5 row" type="submit" value="회원추가"/>
 			<script type="text/javascript" src="${memberInsertJs}"></script>	
