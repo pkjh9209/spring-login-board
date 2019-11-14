@@ -87,6 +87,16 @@
 				</c:forEach>
 			</ul>
 		</div>
+		<div class="row">
+			<form action="${path}/freeboard/cmtWriteProc.do" method="post">
+				<input type="hidden" name="boardIdx" value="${bdView.boardIdx}">
+				<p>작성자</p>
+				<input type="text" name="writer">
+				<p>덧글내용</p>
+				<input type="text" name="cmtContent">
+				<input type="submit" value="작성하기">
+			</form>
+		</div>
 	</div>
 </body>
 </html>

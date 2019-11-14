@@ -68,12 +68,6 @@ public class FreeboardController {
 		model.addAttribute("cmtList", cmtList);
 		return "/freeboard/boardView";
 	}
-	//댓글작성
-	@RequestMapping(value = "/cmtWriteProc.do", method = RequestMethod.POST)
-	public String cmtWriteProc(CommentDTO cd) throws Exception{
-		
-		return null;
-	}
 	
 	//수정 페이지 
 	@RequestMapping(value = "/boardUpdate.do", method = RequestMethod.GET)
@@ -106,6 +100,14 @@ public class FreeboardController {
 		
 		System.out.println("삭제완료");
 		service.delete(idx);
+		return "redirect:/freeboard/index.do";
+	}
+	
+	//댓글작성
+	@RequestMapping(value = "/cmtWriteProc.do", method = RequestMethod.POST)
+	public String cmtWriteProc(CommentDTO cd) throws Exception{
+		cmtService.writeComment(cd);
+		
 		return "redirect:/freeboard/index.do";
 	}
 	

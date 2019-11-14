@@ -33,7 +33,7 @@
 		</div>
 <!-- body  -->
 		<div class="row">
-			<form action="${path}/member/insertProc.do" onsubmit="return numAdd()">
+			<form action="${path}/member/insertProc.do" method="post" onsubmit="return numAdd()">
 				<input type="hidden" id="userTel01" name="userTel"/>
 				<p>아이디</p>
 				<div class="col-lg-12">

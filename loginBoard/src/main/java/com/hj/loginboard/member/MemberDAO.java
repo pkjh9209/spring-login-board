@@ -1,18 +1,20 @@
 package com.hj.loginboard.member;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MemberService {
+public class MemberDAO {
 	@Autowired
-	private MemberDAO dao;
-	//회원가입 service
+	private SqlSession ss;
+	//회원가입 dao
 	public void memeberInsert(MemberDTO md) throws Exception{
-		dao.memeberInsert(md);
+		ss.insert("member.memberInsert",md);
 	}
-	//로그인 service
+	//로그인 dao
 	public MemberDTO memberLogin(MemberDTO md)throws Exception{
-		return dao.memberLogin(md);
+		return ss.selectOne("member.memberlogin",md);
 	}
+	
 }
