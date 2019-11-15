@@ -5,6 +5,32 @@
 	<meta charset="utf-8">
 	<%@include file ="../head.jsp" %>
 	<spring:url value="/resources/js/memberInsert.js" var="memberInsertJs"></spring:url>
+	<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#idCheck").click( function() {
+			var query = {userId : $("#userId").val()};
+				$.ajax({
+					  url : "idCheck",
+					  type : "post",
+					  data : query,
+					  success : function(data) {
+						  if(data == 1) {
+							  $(".result .msg").text("사용 불가");
+							  $(".result .msg").attr("style", "color:#f00");    
+						  } else {
+							  $(".result .msg").text("사용 가능");
+							  $(".result .msg").attr("style", "color:#00f");
+						  }
+						  
+					  },
+					  error : function(e){
+						  alert("관리자에게 문의해주세요.")
+					  }
+				});
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -36,11 +62,11 @@
 				<input type="hidden" id="userTel01" name="userTel"/>
 				<p>아이디</p>
 				<div class="col-lg-12">
-					<input class="form-control" type="text" name="userId"/>
-					<script type="text/javascript" src="${idCheckAjax}"></script>
-					<button type="button" onclick="idCheck();" class="idCheck">아이디중복확인</button>
+					<input class="form-control" type="text" id="userId" name="userId"/>
+					
+					<button class="idCheck" id="idCheck" type="button">아이디중복확인</button>
 				</div>
-				<div class="result"><span class="msg">이미 아이디가 존재합니다.</span></div>
+				<div class="result"><span class="msg"></span></div>
 				
 				<p>비밀번호</p>
 				<div class="col-lg-12">

@@ -65,12 +65,16 @@
 				<div class="col-sm-1">
 					<a class="btn btn-primary" href="${path}/freeboard/index.do">목록으로</a>
 				</div>
-				<div class="col-sm-1">
-					<input type="submit" class="btn btn-primary" value="수정하기">
-				</div>
-				<div class="col-sm-1">
-					<button type="button" class="btn btn-primary" onclick="location.href='${path}/freeboard/boardDelete.do?writer=${bdView.writer}&boardIdx=${bdView.boardIdx}'">삭제하기</button>
-				</div>
+				<c:set var="ssId" value="${user.userId}"/>
+				<c:set var="wtId" value="${bdView.writer}"/>
+				<c:if test="${ssId == wtId}">
+					<div class="col-sm-1">
+						<input type="submit" class="btn btn-primary" value="수정하기">
+					</div>
+					<div class="col-sm-1">
+						<button type="button" class="btn btn-primary" onclick="location.href='${path}/freeboard/boardDelete.do?writer=${bdView.writer}&boardIdx=${bdView.boardIdx}'">삭제하기</button>
+					</div>
+				</c:if>
 			</form>
 		</div>
 		<div class="row">
@@ -90,7 +94,7 @@
 			<form action="${path}/freeboard/cmtWriteProc.do" method="post">
 				<input type="hidden" name="boardIdx" value="${bdView.boardIdx}">
 				<p>작성자</p>
-				<input type="text" name="writer">
+				<input type="text" name="writer" value="${user.userId}" readonly="readonly">
 				<p>덧글내용</p>
 				<input type="text" name="cmtContent">
 				<input type="submit" value="작성하기">

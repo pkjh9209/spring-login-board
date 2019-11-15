@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,10 +53,11 @@ public class MemberController {
 	}
 	//아이디 체크
 	@ResponseBody
-	@RequestMapping(value = "/idCheck.do",method = RequestMethod.POST)
+	@RequestMapping(value = "/idCheck",method = RequestMethod.POST)
 	public int idCheck(HttpServletRequest req) throws Exception {
 		
 		 String userId = req.getParameter("userId");
+		 
 		 MemberDTO idCheck =  mbService.idCheck(userId);
 		 
 		 int result = 0;
@@ -65,7 +65,6 @@ public class MemberController {
 		 if(idCheck != null) {
 		  result = 1;
 		 } 
-		 
 		 return result;
 		
 	}
